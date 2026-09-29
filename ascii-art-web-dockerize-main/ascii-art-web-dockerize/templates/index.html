@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ASCII Art Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: monospace;
+      background: #f4f4f8;
+      color: #111;
+      margin: 40px;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-family: monospace;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .banner-options {
+      margin: 10px 0;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn:hover {
+      background: #0069d9;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #00ff88;
+      padding: 20px;
+      border-radius: 10px;
+      overflow: auto;
+      white-space: pre;
+      font-size: 14px;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 30px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .ok { background: #e8f5e9; color: #256029; border: 1px solid #a5d6a7; }
+    .bad { background: #fff3e0; color: #e65100; border: 1px solid #ffb74d; }
+    .notfound { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .servererr { background: #ede7f6; color: #4a148c; border: 1px solid #b39ddb; }
+  </style>
+</head>
+<body>
+
+  <h1>ASCII Art Web</h1>
+
+  <!-- Форма -->
+  <form method="POST" action="/ascii-art">
+    <label><strong>Введите текст:</strong></label><br>
+    <textarea name="text" placeholder="Hello\nWorld">{{.Text}}</textarea><br><br>
+
+    <label><strong>Выберите баннер:</strong></label>
+    <div class="banner-options">
+      <label><input type="radio" name="banner" value="standard" {{if eq .Banner "standard"}}checked{{end}}> standard</label>
+      <label><input type="radio" name="banner" value="shadow" {{if eq .Banner "shadow"}}checked{{end}}> shadow</label>
+      <label><input type="radio" name="banner" value="thinkertoy" {{if eq .Banner "thinkertoy"}}checked{{end}}> thinkertoy</label>
+    </div>
+
+    <button class="btn" type="submit">Сгенерировать</button>
+  </form>
+
+  <!-- Показ статуса -->
+  {{if .StatusCode}}
+  <div class="status
+    {{if eq .StatusCode 200}}ok{{end}}
+    {{if eq .StatusCode 400}}bad{{end}}
+    {{if eq .StatusCode 404}}notfound{{end}}
+    {{if eq .StatusCode 500}}servererr{{end}}">
+    HTTP {{.StatusCode}} —
+    {{if eq .StatusCode 200}} Всё прошло успешно.{{end}}
+    {{if eq .StatusCode 400}} Некорректный запрос. Проверьте ввод.{{end}}
+    {{if eq .StatusCode 404}} Файл баннера или шаблон не найден.{{end}}
+    {{if eq .StatusCode 500}}cler Внутренняя ошибка сервера.{{end}}
+  </div>
+  {{end}}
+
+  <!-- Ошибки -->
+  {{if .ErrorMsg}}
+    <div class="status bad">
+      <strong>Ошибка:</strong> {{.ErrorMsg}}
+    </div>
+  {{end}}
+
+  <!-- Результат -->ascii-art-web-dockerize 
+  {{if .Result}}
+    <h2>Результат ({{.Banner}})</h2>
+    <pre>{{.Result}}</pre>
+  {{end}}
+
+</body>
+</html>

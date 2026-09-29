@@ -1,0 +1,134 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #37a58b; 
+    color: #e9d118;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    overflow-x: hidden;
+}
+h1 {
+    color: #e9ce09;
+    text-align: center;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+form {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+label {
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    margin: 10px 0 5px;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #fff;
+    max-width: 100%; 
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+input[type="radio"] {
+    margin-right: 5px;}
+button {
+    background-color: #ffdb12;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #45a049;
+}
+.error-msg {
+    color: red;
+    font-size: 16px;
+    margin: 10px 0;
+    text-align: center;
+}
+.result-container {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    max-width: none;
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+}
+
+/* Блок с ASCII-артом */
+pre {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    animation: colorShift 4s infinite;
+}
+@keyframes colorShift {
+    0% {
+        color: #ff6347;
+    }
+    25% {
+        color: #ffd700;
+    }
+    50% {
+        color: #00bfff;
+    }
+    75% {
+        color: #32cd32;
+    }
+    100% {
+        color: #ff6347;
+    }
+}
+.radio-group {
+    margin-bottom: 15px;
+}
+.radio-group label {
+    margin-right: 10px;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+    form {
+        width: 90%; 
+    }
+     .result-container {
+        width: 90%;
+    }
+}
